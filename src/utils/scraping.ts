@@ -1,8 +1,9 @@
 import puppeteer from "puppeteer-core";
+import { EXECUTABLE } from "./config";
 
-const scrapData = async () => {
+const scrapSite = async () => {
   const browser = await puppeteer.launch({
-    executablePath: "/usr/bin/google-chrome",
+    executablePath: EXECUTABLE,
     headless: true,
   });
   const page = await browser.newPage();
@@ -19,15 +20,19 @@ const scrapData = async () => {
     const totalData = [];
 
     for (let i = 0; i < rows.length - 2; i++) {
-      const titleElement = rows[i]?.querySelector(".title > .titleline > a");
-      const siteTitleElement = rows[i]?.querySelector(
-        ".title > .titleline > span > a > span",
+      const titleElement: HTMLAnchorElement | null = rows[i]?.querySelector(
+        ".title > .titleline > a"
       );
-      const siteLinkElement = rows[i]?.querySelector(
-        ".title > .titleline > span > a",
+      const siteTitleElement: HTMLSpanElement | null = rows[i]?.querySelector(
+        ".title > .titleline > span > a > span"
       );
-      const pointsElement = rows[i + 1]?.querySelector(".score");
-      const timeElement = rows[i + 1]?.querySelector(".age");
+      const siteLinkElement: HTMLAnchorElement | null = rows[i]?.querySelector(
+        ".title > .titleline > span > a"
+      );
+      const pointsElement: HTMLSpanElement | null =
+        rows[i + 1]?.querySelector(".score");
+      const timeElement: HTMLSpanElement | null =
+        rows[i + 1]?.querySelector(".age");
 
       const data = {
         title: titleElement ? titleElement.innerText : "NULL",
@@ -52,4 +57,4 @@ const scrapData = async () => {
   return data;
 };
 
-export default scrapData;
+export default scrapSite;
