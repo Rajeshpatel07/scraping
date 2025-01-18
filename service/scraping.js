@@ -1,9 +1,9 @@
 import puppeteer from "puppeteer-core";
 
-async function scrapData() {
+const scrapData = async () => {
   const browser = await puppeteer.launch({
     executablePath: "/usr/bin/google-chrome",
-    headless: false,
+    headless: true,
   });
   const page = await browser.newPage();
   await page.goto("https://news.ycombinator.com/", {
@@ -26,16 +26,17 @@ async function scrapData() {
       const siteLinkElement = rows[i]?.querySelector(
         ".title > .titleline > span > a",
       );
-      const pointsElement = rows[i + 1]?.querySelector(".subtext > .score");
-      const timeElement = rows[i + 1]?.querySelector(".subtext > .age");
+      const pointsElement = rows[i + 1]?.querySelector(".score");
+      const timeElement = rows[i + 1]?.querySelector(".age");
 
       const data = {
         title: titleElement ? titleElement.innerText : "NULL",
-        href: titleElement ? titleElement.href : "NULL",
+        link: titleElement ? titleElement.href : "NULL",
         siteTitle: siteTitleElement ? siteTitleElement.innerText : "NULL",
         siteLink: siteLinkElement ? siteLinkElement.href : "NULL",
-        points: pointsElement ? pointsElement.innerText : "NULL",
-        time: timeElement ? timeElement.title : "NULL",
+        upvotes: pointsElement ? pointsElement.innerText.split(" ")[0] : "0",
+        time: timeElement ? timeElement.title.split(" ")[1] : Date.now(),
+        postedAt: timeElement ? timeElement.title.split(" ")[0] : "NULL",
       };
 
       totalData.push(data);
@@ -49,6 +50,6 @@ async function scrapData() {
   await browser.close();
 
   return data;
-}
+};
 
-scrapData();
+export default scrapData;
