@@ -25,10 +25,13 @@ app.use("/api", router);
 
 socket.on("connection", (ws) => {
   ws.on("close", (data) => {
-    console.log(data);
+    console.log("socket disconnected", data);
   });
 });
 
-getData();
 
-server.listen(PORT, () => console.log(`server stared at ${PORT}`));
+
+server.listen(PORT, () => {
+  console.log(`server stared at ${PORT}`)
+  getData();
+});

@@ -5,6 +5,7 @@ const scrapSite = async () => {
   const browser = await puppeteer.launch({
     executablePath: EXECUTABLE,
     headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
   const page = await browser.newPage();
   await page.goto("https://news.ycombinator.com/", {

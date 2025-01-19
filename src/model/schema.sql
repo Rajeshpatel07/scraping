@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS story (
     siteTitle TEXT,
     siteLink TEXT,
     upvotes INT,
-    postTime BIGINT,
+    postTime BIGINT UNIQUE,
     postedAt DATETIME,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

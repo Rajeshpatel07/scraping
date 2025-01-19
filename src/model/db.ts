@@ -25,16 +25,16 @@ export const getAllStories = async () => {
   return stories;
 };
 
-export const getLatestStories = async () => {
+export const getLatestStories = async (limit: number | null) => {
   const [stories] = await db.query(
-    "SELECT * FROM story ORDER BY postedAt DESC"
+    "SELECT * FROM story ORDER BY postedAt DESC LIMIT ?", [limit]
   );
   return stories;
 };
 
 export const addStories = (data: Array<scrapData>) => {
-  data.forEach(async (item) => {
-    await db.query(
+  data.forEach((item) => {
+    db.query(
       "INSERT INTO story (title,link,siteTitle,siteLink,upvotes,postTime,postedAt) VALUES (?,?,?,?,?,?,?)",
       [
         item.title,
@@ -45,7 +45,7 @@ export const addStories = (data: Array<scrapData>) => {
         Number(item.time),
         item.postedAt,
       ]
-    );
+    ).catch(err => console.log('duplicate record'));
   });
   return;
 };

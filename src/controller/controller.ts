@@ -3,7 +3,7 @@ import { getLatestStories } from "../model/db.js";
 
 export const getStories = async (req: Request, res: Response) => {
   try {
-    const stories = await getLatestStories();
+    const stories = await getLatestStories(30);
     res.status(200).json({ stories });
     return;
   } catch (err) {
