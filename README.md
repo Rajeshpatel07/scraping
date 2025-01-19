@@ -5,7 +5,8 @@ This project Scrap data from hacker news website and push live updates in real-t
 ## Features
 - Scrap hacker news website and collect latest stories. 
 - The scraped data is stored in Database.
-- Periodically scrape and send latest stories to connected clients via websocket (every 5 mins).
+- Periodically scrape data rom hacker news.(every 5 minutes).
+- We can change the time according our choice by changing `.env`.
 
 ## Architecture
 
@@ -80,16 +81,16 @@ Before setting up the project, ensure you have the following installed:
 
 ## API Documentation
 
-- #### Get simple(UI) page.
+- #### Get simple HTML UI page.
 
 ```http
-    GET /
+    GET http://localhost:5000/
 ```
 
-- #### Get Stories
+- #### Get Array of Stories
 
 ```http
-    GET /api/stories
+    GET http://localhost:5000/api/stories
 ```
 - #### websocket
  ```http
@@ -121,5 +122,4 @@ Before setting up the project, ensure you have the following installed:
 - The stories array are the new stories scraped from hacker news
 
 ### Testing Tools:
-- Use `Postman` for testing. 
-- use `curl` for http testing from terminal.
+- Use `Postman` for testing `websocket` and `RESTAPI'S`. 
