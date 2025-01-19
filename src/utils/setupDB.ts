@@ -1,9 +1,24 @@
-
 import fs from 'fs';
-import { db } from '../model/db.js';
+import { createPool, PoolOptions } from "mysql2/promise";
 import path from 'path';
+import {
+  DB_HOST,
+  DB_PASSWORD,
+  DB_PORT,
+  DB_USER,
+} from "../utils/config.js";
+
+const poolOptions: PoolOptions = {
+  host: DB_HOST,
+  port: DB_PORT,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  connectionLimit: 10,
+  multipleStatements: true
+};
 
 const setupDB = async (filePath: string): Promise<void> => {
+  const db = createPool(poolOptions);
   try {
     const sql = fs.readFileSync(filePath, 'utf8');
     const commands = sql.split(";").map(command => command.trim()).filter(command => command);

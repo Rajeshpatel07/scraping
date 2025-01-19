@@ -15,6 +15,7 @@ socket.onmessage = (event) => {
   console.log(message);
   if (message.event === "newStories") {
     //console.log(message);
+    document.getElementById("count").innerText = message.count;
     message.stories.forEach((item) => showStories(item, true));
   }
 };

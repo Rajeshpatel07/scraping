@@ -24,8 +24,6 @@ export const getData = async () => {
     //@ts-ignore
     const cleanedData = await cleanData(db_data[0], scrapedData);
 
-    console.log("cleanedData==> ", cleanedData);
-
     if (cleanedData) {
       addStories(cleanedData);
       messagesCount += cleanedData.length;
@@ -42,7 +40,6 @@ export const getData = async () => {
   } else {
     addStories(scrapedData);
   }
-
   setTimeout(getData, 1000 * 60 * INTERVEL);
 };
 
