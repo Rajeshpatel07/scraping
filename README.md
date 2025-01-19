@@ -7,6 +7,12 @@ This project Scrap data from hacker news website and push live updates in real-t
 - The scraped data is stored in Database.
 - Periodically scrape and send latest stories to connected clients via websocket (every 5 mins).
 
+## Architecture
+
+<div align="center">
+<img src="./public/architecture.png" class="center-image">
+</div>
+
 ## Prerequisites
 Before setting up the project, ensure you have the following installed:
 - [Node.js](https://nodejs.org/) (version 18.x or later)
@@ -30,7 +36,7 @@ Before setting up the project, ensure you have the following installed:
     ```bash
     cp .env.sample .env
     ```
-    - Edit `.env` file according to instructions.
+    - Edit `.env` file according to instructions inside `.env.sample file`.
 
 4. **Build the project**
     ```bash
@@ -52,8 +58,6 @@ Before setting up the project, ensure you have the following installed:
 
 ## Installation with Docker
 
-**NOTE: It is not recommended because the container can't use browser from inside container**
-
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/Rajeshpatel07/scraping
@@ -65,7 +69,7 @@ Before setting up the project, ensure you have the following installed:
     cp .env.sample .env
     ```
 
-    - Edit `.env` file according to instructions.
+    - Edit `.env` file according to instructions inside `.env.sample file`.
 
 3. **Start Container**
     ```bash
