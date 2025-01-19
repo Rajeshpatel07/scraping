@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer-core";
-import { EXECUTABLE } from "./config";
+import { EXECUTABLE } from "./config.js";
 
 const scrapSite = async () => {
   const browser = await puppeteer.launch({

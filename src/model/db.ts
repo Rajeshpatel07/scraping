@@ -14,11 +14,12 @@ const poolOptions: PoolOptions = {
   user: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
-  connectionLimit: 10 
+  connectionLimit: 10
 };
 
-// Create a pool using createPool
 export const db = createPool(poolOptions);
+
+
 export const getAllStories = async () => {
   const [stories] = await db.query("SELECT * FROM story;");
   return stories;
@@ -34,10 +35,11 @@ export const getLatestStories = async () => {
 export const addStories = (data: Array<scrapData>) => {
   data.forEach(async (item) => {
     await db.query(
-      "INSERT INTO story (title,link,site,upvotes,postTime,postedAt) VALUES (?,?,?,?,?,?)",
+      "INSERT INTO story (title,link,siteTitle,siteLink,upvotes,postTime,postedAt) VALUES (?,?,?,?,?,?,?)",
       [
         item.title,
         item.link,
+        item.siteTitle,
         item.siteLink,
         Number(item.upvotes),
         Number(item.time),

@@ -1,46 +1,43 @@
-import { story } from "src/types/type";
-
-const storyDiv: HTMLElement | null = document.getElementById("stories");
+const storyDiv = document.getElementById("stories");
 const socket = new WebSocket("ws://localhost:5000");
 
 async function stories() {
   try {
     const request = await fetch("/api/stories");
     const resposne = await request.json();
-    resposne.stories.forEach((item: story) => showStories(item, false));
+    resposne.stories.forEach((item) => showStories(item, false));
   } catch (err) {
     console.log(err);
   }
 }
 socket.onmessage = (event) => {
   const message = JSON.parse(event.data);
+  console.log(message);
   if (message.event === "newStories") {
-    console.log(message);
-    showStories(message, true);
+    //console.log(message);
+    message.stories.forEach((item) => showStories(item, true));
   }
 };
 
-function showStories(story: story, isSocket: boolean) {
+function showStories(story, isSocket) {
   const div = document.createElement("div");
 
   const link = document.createElement("a");
   link.href = story.link;
   link.innerText = story.title;
-  link.setAttribute("id", "title");
+  link.setAttribute("class", "title");
 
   const sitelink = document.createElement("a");
-  sitelink.href = story.site;
-  sitelink.innerText = `(${story.site})`;
-  sitelink.setAttribute("id", "site");
+  sitelink.href = story.siteLink;
+  sitelink.innerText = `(${story.siteTitle})`;
+  sitelink.setAttribute("class", "site");
 
   div.append(link);
   div.append(sitelink);
-  if (storyDiv) {
-    if (isSocket) {
-      storyDiv.insertBefore(div, storyDiv.firstChild);
-    } else {
-      storyDiv.append(div);
-    }
+  if (isSocket) {
+    storyDiv.insertBefore(div, storyDiv.firstChild);
+  } else {
+    storyDiv.append(div);
   }
 }
 
