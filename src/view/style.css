@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: black;
+  color: white;
+}
+header {
+  display: flex;
+  justify-content: end;
+  padding: 1rem 3rem;
+}
+main {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5vh;
+  font-size: 1.5rem;
+}
+.wrapper {
+  border: solid 1px rgb(208, 208, 208);
+  margin: 1rem 0rem;
+  padding: 1rem 3rem;
+  border-radius: 0.5rem;
+}
+.wrapper:hover {
+  background-color: rgb(35, 35, 35);
+}
+.main{
+	margin-bottom: 0.3rem;
+}
+.title {
+  color: white;
+  text-decoration: none;
+  padding: 0px 3px;
+}
+.site {
+  font-size: 1rem;
+  color:rgb(105 105 255);
+}
+.details {
+  font-size: 1rem;
+  display: flex;
+  gap: 5px;
+}
+p,
+h4 {
+  margin: 0px 4px;
+  display: inline;
+  font-size: 1.5rem;
+}
